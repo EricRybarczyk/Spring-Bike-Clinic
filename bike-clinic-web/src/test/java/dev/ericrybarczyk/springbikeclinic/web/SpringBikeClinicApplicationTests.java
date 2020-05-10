@@ -1,4 +1,4 @@
-package dev.ericrybarczyk.springbikeclinic;
+package dev.ericrybarczyk.springbikeclinic.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
