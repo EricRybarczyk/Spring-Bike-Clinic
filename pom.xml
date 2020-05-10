@@ -14,7 +14,7 @@
     </parent>
     <groupId>dev.ericrybarczyk</groupId>
     <artifactId>spring-bike-clinic</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>spring-bike-clinic</name>
     <description>Demo project for Spring Boot</description>
 
@@ -41,7 +41,7 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:EricRybarczyk/Spring-Bike-Clinic.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>spring-bike-clinic-0.0.2</tag>
   </scm>
 
 </project>
