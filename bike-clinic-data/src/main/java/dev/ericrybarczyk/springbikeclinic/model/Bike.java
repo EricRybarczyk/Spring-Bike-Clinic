@@ -2,7 +2,7 @@ package dev.ericrybarczyk.springbikeclinic.model;
 
 import java.time.LocalDate;
 
-public class Bike {
+public class Bike extends BaseEntity {
     private BikeType bikeType;
     private BikeOwner owner;
     private LocalDate purchaseDate;

@@ -1,6 +1,6 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
-public class BikeType {
+public class BikeType extends BaseEntity {
 
     private String modelName;
 
