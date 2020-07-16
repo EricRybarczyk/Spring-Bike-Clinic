@@ -21,13 +21,11 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         BikeOwner owner1 = new BikeOwner();
-        owner1.setId(1L);
         owner1.setFirstName("John");
         owner1.setLastName("Smith");
         bikeOwnerService.save(owner1);
 
         BikeOwner owner2 = new BikeOwner();
-        owner2.setId(2L);
         owner2.setFirstName("Sarah");
         owner2.setLastName("Jones");
         bikeOwnerService.save(owner2);
@@ -35,13 +33,11 @@ public class DataInitializer implements CommandLineRunner {
         System.out.println("Loaded BikeOwner bootstrap data.");
 
         Mechanic mechanic1 = new Mechanic();
-        mechanic1.setId(1L);
         mechanic1.setFirstName("Kyle");
         mechanic1.setLastName("Fisher");
         mechanicService.save(mechanic1);
 
         Mechanic mechanic2 = new Mechanic();
-        mechanic2.setId(2L);
         mechanic2.setFirstName("Terri");
         mechanic2.setLastName("Manning");
         mechanicService.save(mechanic2);

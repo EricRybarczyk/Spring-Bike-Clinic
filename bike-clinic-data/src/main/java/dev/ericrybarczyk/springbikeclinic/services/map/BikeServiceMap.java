@@ -20,7 +20,7 @@ public class BikeServiceMap extends AbstractMapService<Bike, Long> implements Bi
 
     @Override
     public Bike save(Bike bike) {
-        return super.save(bike.getId(), bike);
+        return super.save(bike);
     }
 
     @Override

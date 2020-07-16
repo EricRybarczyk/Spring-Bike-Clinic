@@ -20,7 +20,7 @@ public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> imple
 
     @Override
     public Mechanic save(Mechanic mechanic) {
-        return super.save(mechanic.getId(), mechanic);
+        return super.save(mechanic);
     }
 
     @Override

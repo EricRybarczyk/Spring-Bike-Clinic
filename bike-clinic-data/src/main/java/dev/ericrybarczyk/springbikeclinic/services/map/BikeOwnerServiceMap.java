@@ -20,7 +20,7 @@ public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> imp
 
     @Override
     public BikeOwner save(BikeOwner bikeOwner) {
-        return super.save(bikeOwner.getId(), bikeOwner);
+        return super.save(bikeOwner);
     }
 
     @Override
