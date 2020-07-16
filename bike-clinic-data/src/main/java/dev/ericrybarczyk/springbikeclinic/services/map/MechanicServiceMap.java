@@ -2,9 +2,12 @@ package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.Mechanic;
 import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
+import org.springframework.stereotype.Service;
 import java.util.Set;
 
+@Service
 public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
+
     @Override
     public Set<Mechanic> findAll() {
         return super.findAll();

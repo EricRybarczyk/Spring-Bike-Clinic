@@ -4,8 +4,6 @@ import dev.ericrybarczyk.springbikeclinic.model.BikeOwner;
 import dev.ericrybarczyk.springbikeclinic.model.Mechanic;
 import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
 import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
-import dev.ericrybarczyk.springbikeclinic.services.map.BikeOwnerServiceMap;
-import dev.ericrybarczyk.springbikeclinic.services.map.MechanicServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +13,9 @@ public class DataInitializer implements CommandLineRunner {
     private final BikeOwnerService bikeOwnerService;
     private final MechanicService mechanicService;
 
-    public DataInitializer() {
-        bikeOwnerService = new BikeOwnerServiceMap();
-        mechanicService = new MechanicServiceMap();
+    public DataInitializer(BikeOwnerService bikeOwnerService, MechanicService mechanicService) {
+        this.bikeOwnerService = bikeOwnerService;
+        this.mechanicService = mechanicService;
     }
 
     @Override

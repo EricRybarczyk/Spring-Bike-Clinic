@@ -2,8 +2,10 @@ package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.BikeOwner;
 import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
+import org.springframework.stereotype.Service;
 import java.util.Set;
 
+@Service
 public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> implements BikeOwnerService {
 
     @Override
