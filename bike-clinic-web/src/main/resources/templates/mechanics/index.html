@@ -5,7 +5,25 @@
     <title>List of Mechanics</title>
 </head>
 <body>
-
+<!--/*@thymesVar id="mechanic type="dev.ericrybarczyk.springbikeclinic.model.Mechanic"*/-->
 <h1 th:text="'List of Mechanics'">List of Mechanics...</h1>
+
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mechanic : ${mechanics}">
+        <td th:text="${mechanic.id}">1</td>
+        <td th:text="${mechanic.firstName}">First</td>
+        <td th:text="${mechanic.lastName}">Last</td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
