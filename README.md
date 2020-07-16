@@ -1,5 +1,5 @@
 # Spring-Bike-Clinic
-Spring Demo App
+UNDER DEVELOPMENT, NOT COMPLETE (Summer 2020)
 
 This application is influenced by the [Spring Pet Clinic](https://github.com/spring-projects/spring-petclinic) 
 reference application, though implemented with a different subject domain. It was developed as a learning project 
