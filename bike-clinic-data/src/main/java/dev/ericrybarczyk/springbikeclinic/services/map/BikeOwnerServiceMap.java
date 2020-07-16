@@ -1,10 +1,10 @@
 package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.BikeOwner;
-import dev.ericrybarczyk.springbikeclinic.services.CrudService;
+import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
 import java.util.Set;
 
-public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> implements CrudService<BikeOwner, Long> {
+public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> implements BikeOwnerService {
 
     @Override
     public Set<BikeOwner> findAll() {
@@ -29,5 +29,10 @@ public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> imp
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public Set<BikeOwner> findByLastName(String lastName) {
+        return null; // TODO: implementation
     }
 }

@@ -1,10 +1,10 @@
 package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.Mechanic;
-import dev.ericrybarczyk.springbikeclinic.services.CrudService;
+import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
 import java.util.Set;
 
-public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements CrudService<Mechanic, Long> {
+public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
     @Override
     public Set<Mechanic> findAll() {
         return super.findAll();
