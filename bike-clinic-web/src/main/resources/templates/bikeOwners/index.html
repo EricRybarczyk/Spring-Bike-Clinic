@@ -5,7 +5,25 @@
     <title>List of Bike Owners</title>
 </head>
 <body>
-
+<!--/*@thymesVar id="owner type="dev.ericrybarczyk.springbikeclinic.model.BikeOwner"*/-->
 <h1 th:text="'List of Bike Owners'">Bike Owners...</h1>
+
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="owner : ${owners}">
+        <td th:text="${owner.id}">1</td>
+        <td th:text="${owner.firstName}">First</td>
+        <td th:text="${owner.lastName}">Last</td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
