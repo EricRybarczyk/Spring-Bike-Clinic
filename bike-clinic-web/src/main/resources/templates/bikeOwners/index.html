@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
 <head>
     <meta charset="UTF-8">
     <title>List of Bike Owners</title>
 </head>
 <body>
 <!--/*@thymesVar id="owner type="dev.ericrybarczyk.springbikeclinic.model.BikeOwner"*/-->
-<h1 th:text="'List of Bike Owners'">Bike Owners...</h1>
+<h2 th:text="'List of Bike Owners'">Bike Owners...</h2>
 
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
-        <td>Id</td>
-        <td>First Name</td>
-        <td>Last Name</td>
+        <td style="width: 80px;">Id</td>
+        <td style="width: 160px;">First Name</td>
+        <td style="width: 220px;">Last Name</td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="owner : ${owners}">
-        <td th:text="${owner.id}">1</td>
+        <td><a th:href="@{/bikeOwners/__${owner.id}__}" th:text="${owner.id}"></a></td>
         <td th:text="${owner.firstName}">First</td>
         <td th:text="${owner.lastName}">Last</td>
     </tr>
