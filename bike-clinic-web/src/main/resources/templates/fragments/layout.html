@@ -1,5 +1,5 @@
 <!doctype html>
-<html th:fragment="layout (template, menu)">
+<html xmlns:th="http://www.thymeleaf.org"  th:fragment="layout (template, menu)">
 
 <head>
 
@@ -17,7 +17,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-  <link rel="stylesheet" th:href="@{/resources/css/petclinic.css}" />
+  <link rel="stylesheet" th:href="@{/resources/css/bikeclinic.css}" />
 
 </head>
 
@@ -53,23 +53,25 @@
 
         <ul class="nav navbar-nav navbar-right">
 
-          <li th:replace="::menuItem ('/','index','index.html','Index')">
+          <!-- menuItem (link,active,title,glyph,text) -->
+
+          <li th:replace="::menuItem ('/','index','home page','home','Home')">
             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
             <span>Home</span>
           </li>
 
-          <li th:replace="::menuItem ('/bikeOwners/find','owners','find owners','search','Find owners')">
+          <li th:replace="::menuItem ('/bikeOwners','bikeOwners','bike owners','search','Bike Owners')">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             <span>Bike owners</span>
           </li>
 
-          <li th:replace="::menuItem ('/mechanics.html','mechanics','th-list','Mechanics')">
+          <li th:replace="::menuItem ('/mechanics','mechanics','mechanics','th-list','Mechanics')">
             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
             <span>Mechanics</span>
           </li>
 
           <li
-            th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
+            th:replace="::menuItem ('/oops','error','trigger a RuntimeException to see how it is handled','warning-sign','Error')">
             <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
             <span>Error</span>
           </li>
