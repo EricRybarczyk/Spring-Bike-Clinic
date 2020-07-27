@@ -2,13 +2,13 @@ package dev.ericrybarczyk.springbikeclinic.model;
 
 public class BikeType extends BaseEntity {
 
-    private String modelName;
+    private String name;
 
-    public String getModelName() {
-        return modelName;
+    public String getName() {
+        return name;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void setName(String name) {
+        this.name = name;
     }
 }
