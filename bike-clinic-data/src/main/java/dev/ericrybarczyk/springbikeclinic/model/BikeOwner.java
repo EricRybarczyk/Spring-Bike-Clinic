@@ -1,5 +1,6 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class BikeOwner extends Person {
@@ -8,7 +9,7 @@ public class BikeOwner extends Person {
     private String city;
     private String telephone;
     private String emailAddress;
-    private Set<Bike> bikes;
+    private Set<Bike> bikes = new HashSet<>();
 
     public String getAddress() {
         return address;
