@@ -1,12 +1,20 @@
 package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.Mechanic;
+import dev.ericrybarczyk.springbikeclinic.model.Specialty;
 import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
+import dev.ericrybarczyk.springbikeclinic.services.SpecialtyService;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
 public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
+
+    private final SpecialtyService specialtyService;
+
+    public MechanicServiceMap(SpecialtyService specialtyService) {
+        this.specialtyService = specialtyService;
+    }
 
     @Override
     public Set<Mechanic> findAll() {
@@ -20,6 +28,12 @@ public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> imple
 
     @Override
     public Mechanic save(Mechanic mechanic) {
+        mechanic.getSpecialties().forEach( specialty -> {
+            if (specialty.getId() == null) {
+                Specialty savedSpecialty = specialtyService.save(specialty);
+                specialty.setId(savedSpecialty.getId());
+            }
+        });
         return super.save(mechanic);
     }
 
