@@ -1,8 +1,16 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bike_types")
 public class BikeType extends BaseEntity {
 
+    @Column(name = "name")
     private String name;
+
 
     public String getName() {
         return name;

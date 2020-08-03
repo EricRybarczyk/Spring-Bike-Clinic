@@ -1,11 +1,34 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "bikes")
 public class Bike extends BaseEntity {
+
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "bike_type_id")
     private BikeType bikeType;
+
+    @ManyToOne
+    @JoinColumn(name = "bike_owner_id")
     private BikeOwner owner;
+
+    @Column(name = "purchase_date")
     private LocalDate purchaseDate;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public BikeType getBikeType() {
         return bikeType;
