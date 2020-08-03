@@ -2,6 +2,8 @@ package dev.ericrybarczyk.springbikeclinic.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "bikes")
@@ -20,6 +22,9 @@ public class Bike extends BaseEntity {
 
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike")
+    private Set<Visit> visits = new HashSet<>();
 
 
     public String getDescription() {
@@ -52,5 +57,13 @@ public class Bike extends BaseEntity {
 
     public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }
