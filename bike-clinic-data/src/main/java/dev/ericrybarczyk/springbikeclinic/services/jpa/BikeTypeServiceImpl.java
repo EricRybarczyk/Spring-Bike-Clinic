@@ -16,7 +16,7 @@ public class BikeTypeServiceImpl implements BikeTypeService {
 
     @Override
     public Set<BikeType> findAll() {
-        HashSet<BikeType> result = new HashSet<>();
+        Set<BikeType> result = new HashSet<>();
         bikeTypeRepository.findAll().forEach(result::add);
         return result;
     }

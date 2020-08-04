@@ -20,7 +20,7 @@ public class MechanicServiceImpl implements MechanicService {
 
     @Override
     public Set<Mechanic> findAll() {
-        HashSet<Mechanic> result = new HashSet<>();
+        Set<Mechanic> result = new HashSet<>();
         mechanicRepository.findAll().forEach(result::add);
         return result;
     }
