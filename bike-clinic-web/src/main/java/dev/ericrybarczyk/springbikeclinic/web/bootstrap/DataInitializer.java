@@ -1,10 +1,7 @@
 package dev.ericrybarczyk.springbikeclinic.web.bootstrap;
 
 import dev.ericrybarczyk.springbikeclinic.model.*;
-import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
-import dev.ericrybarczyk.springbikeclinic.services.BikeTypeService;
-import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
-import dev.ericrybarczyk.springbikeclinic.services.SpecialtyService;
+import dev.ericrybarczyk.springbikeclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
@@ -16,12 +13,14 @@ public class DataInitializer implements CommandLineRunner {
     private final MechanicService mechanicService;
     private final BikeTypeService bikeTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataInitializer(BikeOwnerService bikeOwnerService, MechanicService mechanicService, BikeTypeService bikeTypeService, SpecialtyService specialtyService) {
+    public DataInitializer(BikeOwnerService bikeOwnerService, MechanicService mechanicService, BikeTypeService bikeTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.bikeOwnerService = bikeOwnerService;
         this.mechanicService = mechanicService;
         this.bikeTypeService = bikeTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -82,6 +81,12 @@ public class DataInitializer implements CommandLineRunner {
         owner1.getBikes().add(johnBike1);
         bikeOwnerService.save(owner1);
 
+        Visit johnVisit = new Visit();
+        johnVisit.setBike(johnBike1);
+        johnVisit.setDate(LocalDate.of(2020, 07, 29));
+        johnVisit.setDescription("True the front wheel");
+        visitService.save(johnVisit);
+
         BikeOwner owner2 = new BikeOwner();
         owner2.setFirstName("Sarah");
         owner2.setLastName("Jones");
@@ -96,6 +101,12 @@ public class DataInitializer implements CommandLineRunner {
         saraBike1.setPurchaseDate(LocalDate.of(2018, 4, 15));
         owner2.getBikes().add(saraBike1);
         bikeOwnerService.save(owner2);
+
+        Visit saraVisit = new Visit();
+        saraVisit.setBike(saraBike1);
+        saraVisit.setDate(LocalDate.of(2020, 8, 3));
+        saraVisit.setDescription("Brake bleed");
+        visitService.save(saraVisit);
 
         System.out.println("Loaded BikeOwner bootstrap data.");
 
