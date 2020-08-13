@@ -20,7 +20,7 @@ public class BikeOwner extends Person {
     @Column(name = "email")
     private String emailAddress;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bikeOwner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Bike> bikes = new HashSet<>();
 
 

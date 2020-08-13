@@ -4,10 +4,12 @@ import dev.ericrybarczyk.springbikeclinic.model.Mechanic;
 import dev.ericrybarczyk.springbikeclinic.model.Specialty;
 import dev.ericrybarczyk.springbikeclinic.services.MechanicService;
 import dev.ericrybarczyk.springbikeclinic.services.SpecialtyService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
+@Profile({"default","map"})
 public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
 
     private final SpecialtyService specialtyService;

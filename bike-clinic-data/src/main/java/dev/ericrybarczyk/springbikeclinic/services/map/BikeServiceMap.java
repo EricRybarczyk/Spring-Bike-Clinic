@@ -2,10 +2,12 @@ package dev.ericrybarczyk.springbikeclinic.services.map;
 
 import dev.ericrybarczyk.springbikeclinic.model.Bike;
 import dev.ericrybarczyk.springbikeclinic.services.BikeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
+@Profile({"default","map"})
 public class BikeServiceMap extends AbstractMapService<Bike, Long> implements BikeService {
 
     @Override

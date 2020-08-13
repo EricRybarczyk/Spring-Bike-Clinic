@@ -5,10 +5,15 @@ import dev.ericrybarczyk.springbikeclinic.model.BikeOwner;
 import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
 import dev.ericrybarczyk.springbikeclinic.services.BikeService;
 import dev.ericrybarczyk.springbikeclinic.services.BikeTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
+@Profile({"default","map"})
 public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> implements BikeOwnerService {
 
     private final BikeTypeService bikeTypeService;
@@ -17,6 +22,20 @@ public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> imp
     public BikeOwnerServiceMap(BikeTypeService bikeTypeService, BikeService bikeService) {
         this.bikeTypeService = bikeTypeService;
         this.bikeService = bikeService;
+    }
+
+    @Override
+    public Optional<BikeOwner> findByLastName(String lastName) {
+        return super.findAll().stream()
+                .filter(e -> e.getLastName().equalsIgnoreCase(lastName))
+                .findFirst();
+    }
+
+    @Override
+    public List<BikeOwner> findAllByLastName(String lastName) {
+        return super.findAll().stream()
+                .filter(e -> e.getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -62,8 +81,4 @@ public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> imp
         super.deleteById(id);
     }
 
-    @Override
-    public Set<BikeOwner> findByLastName(String lastName) {
-        return null; // TODO: implementation
-    }
 }
