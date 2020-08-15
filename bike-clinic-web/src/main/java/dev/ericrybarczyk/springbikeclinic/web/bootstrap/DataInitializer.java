@@ -108,6 +108,29 @@ public class DataInitializer implements CommandLineRunner {
         saraVisit.setDescription("Brake bleed");
         visitService.save(saraVisit);
 
+        // Try out the Builder from Lombok
+        Bike mikeBike1 = Bike.builder()
+                .bikeType(road)
+                .description("Crazy Speedy")
+                .purchaseDate(LocalDate.of(2017, 7, 4))
+                .build();
+        BikeOwner owner3 = BikeOwner.builder()
+                .firstName("Michael")
+                .lastName("Thomas")
+                .address("5150 Rocking Lane")
+                .city("Pasadena")
+                .telephone("8889845150")
+                .emailAddress("michael@domain.com")
+                .bike(mikeBike1)
+                .build();
+        Visit mikeBikeVisit = Visit.builder()
+                .bike(mikeBike1)
+                .date(LocalDate.of(2020, 8, 11))
+                .description("New tires")
+                .build();
+        bikeOwnerService.save(owner3);
+        visitService.save(mikeBikeVisit);
+
         System.out.println("Loaded BikeOwner bootstrap data.");
 
         // Mechanic -----------------------------------------------------------

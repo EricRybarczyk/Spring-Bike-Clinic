@@ -1,9 +1,15 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
+import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "bike_types")
 public class BikeType extends BaseEntity {
@@ -11,12 +17,4 @@ public class BikeType extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

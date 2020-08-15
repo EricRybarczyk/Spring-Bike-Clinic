@@ -1,12 +1,29 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
+import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "bike_owners")
 public class BikeOwner extends Person {
+
+    /* This constructor with chained super calls isa required due to the inheritance hierarchy combined with using the @Builder annotation.
+       Also, the @Singular annotation on the collection parameter so Lombok will treat that builder node as a collection, and generate 'adder' methods instead of a 'setter' method.
+     */
+    @Builder
+    public BikeOwner(Long id, String firstName, String lastName, String address, String city, String telephone, String emailAddress, @Singular Set<Bike> bikes) {
+        super(id, firstName, lastName);
+        this.address = address;
+        this.city = city;
+        this.telephone = telephone;
+        this.emailAddress = emailAddress;
+        this.bikes = bikes;
+    }
 
     @Column(name = "address")
     private String address;
@@ -23,44 +40,4 @@ public class BikeOwner extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Bike> bikes = new HashSet<>();
 
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public Set<Bike> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(Set<Bike> bikes) {
-        this.bikes = bikes;
-    }
 }
