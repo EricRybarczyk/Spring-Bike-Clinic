@@ -20,4 +20,9 @@ public class BikeOwnerController {
         model.addAttribute("owners", bikeOwnerService.findAll());
         return "bikeOwners/index";
     }
+
+    @RequestMapping("/find")
+    public String findBikeOwners() {
+        return "notimplemented";
+    }
 }
