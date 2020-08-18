@@ -7,6 +7,7 @@ while completing John Thompson's
 [Spring Framework 5: Beginner to Guru](https://www.udemy.com/spring-framework-5-beginner-to-guru/?couponCode=GITHUB_SFGPETCLINIC) 
 Udemy course.
 
+CircleCI Build Status: ![CircleCI Badge](https://circleci.com/gh/EricRybarczyk/Spring-Bike-Clinic.svg?style=svg)
 # 
 ### Welcome to the Bike Clinic
 
