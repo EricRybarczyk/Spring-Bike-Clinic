@@ -1,5 +1,5 @@
 # Spring-Bike-Clinic
-UNDER DEVELOPMENT, NOT COMPLETE (Summer 2020)
+UNDER DEVELOPMENT, NOT COMPLETE (Summer-Fall 2020)
 
 This Spring Boot demo application is influenced by the [Spring Pet Clinic](https://github.com/spring-projects/spring-petclinic) 
 reference application, though implemented with a different subject domain. It is under active development as a learning project 
