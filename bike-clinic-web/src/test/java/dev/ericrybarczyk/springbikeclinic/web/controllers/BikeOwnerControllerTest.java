@@ -5,6 +5,7 @@ import dev.ericrybarczyk.springbikeclinic.services.BikeOwnerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -16,7 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 
 @ExtendWith(MockitoExtension.class)
 class BikeOwnerControllerTest {
@@ -71,4 +72,15 @@ class BikeOwnerControllerTest {
         // currently the method being tested is not implemented, so make sure no interactions
         Mockito.verifyNoInteractions(bikeOwnerService);
     }
+
+    @Test
+    void testShowBikeOwner() throws Exception {
+        Mockito.when(bikeOwnerService.findById(ArgumentMatchers.anyLong())).thenReturn(BikeOwner.builder().id(1L).build());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/bikeOwnerDetails"))
+                .andExpect(MockMvcResultMatchers.model().attribute("bikeOwner", hasProperty("id", is(1L))));
+    }
+
 }
