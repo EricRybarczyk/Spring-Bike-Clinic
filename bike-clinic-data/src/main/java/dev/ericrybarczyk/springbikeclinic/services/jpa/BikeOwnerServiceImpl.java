@@ -37,6 +37,11 @@ public class BikeOwnerServiceImpl implements BikeOwnerService {
     }
 
     @Override
+    public List<BikeOwner> findAllByLastNameLikeIgnoreCase(String lastName) {
+        return bikeOwnerRepository.findAllByLastNameLikeIgnoreCase(lastName);
+    }
+
+    @Override
     public Set<BikeOwner> findAll() {
         Set<BikeOwner> owners = new HashSet<>();
         bikeOwnerRepository.findAll().forEach(owners::add);

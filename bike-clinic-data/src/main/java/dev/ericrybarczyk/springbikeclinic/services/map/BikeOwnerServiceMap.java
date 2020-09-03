@@ -39,6 +39,13 @@ public class BikeOwnerServiceMap extends AbstractMapService<BikeOwner, Long> imp
     }
 
     @Override
+    public List<BikeOwner> findAllByLastNameLikeIgnoreCase(String lastName) {
+        return super.findAll().stream()
+                .filter(e -> e.getLastName().toLowerCase().startsWith(lastName.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Set<BikeOwner> findAll() {
         return super.findAll();
     }

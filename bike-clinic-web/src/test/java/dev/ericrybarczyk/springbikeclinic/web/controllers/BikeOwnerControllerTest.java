@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
@@ -28,49 +30,51 @@ class BikeOwnerControllerTest {
     private BikeOwnerController controller;
 
     private MockMvc mockMvc;
-    private Set<BikeOwner> BIKE_OWNERS;
-    public static final String BIKE_OWNERS_INDEX_GET_PATH = "/bikeOwners";
-    public static final String BIKE_OWNERS_FIND_GET_PATH = "/bikeOwners/find";
-    private static final String BIKE_OWNERS_INDEX_VIEW_NAME = "bikeOwners/index";
-    private static final String BIKE_OWNERS_MODEL_ATTRIBUTE_NAME = "owners";
-    private static final String NOT_IMPLEMENTED_VIEW_NAME = "notimplemented";
+    private Set<BikeOwner> BIKE_OWNERS_SET;
+    private List<BikeOwner> BIKE_OWNERS_LIST;
 
     @BeforeEach
     void setUp() {
-        BIKE_OWNERS = new HashSet<>();
-        BIKE_OWNERS.add(BikeOwner.builder().id(1L).build());
-        BIKE_OWNERS.add(BikeOwner.builder().id(2L).build());
+        BIKE_OWNERS_SET = new HashSet<>();
+        BIKE_OWNERS_SET.add(BikeOwner.builder().id(1L).build());
+        BIKE_OWNERS_SET.add(BikeOwner.builder().id(2L).build());
+
+        BIKE_OWNERS_LIST = new ArrayList<>();
+        BIKE_OWNERS_LIST.add(BikeOwner.builder().id(1L).build());
+        BIKE_OWNERS_LIST.add(BikeOwner.builder().id(2L).build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
     @Test
-    void listBikeOwners() throws Exception {
-        Mockito.when(bikeOwnerService.findAll()).thenReturn(BIKE_OWNERS);
-
-        mockMvc.perform(MockMvcRequestBuilders.get(BIKE_OWNERS_INDEX_GET_PATH))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(BIKE_OWNERS_INDEX_VIEW_NAME))
-                .andExpect(MockMvcResultMatchers.model().attribute(BIKE_OWNERS_MODEL_ATTRIBUTE_NAME, hasSize(2)));
-    }
-
-    @Test
-    void listBikeOwnersWithIndexPathSegment() throws Exception {
-        Mockito.when(bikeOwnerService.findAll()).thenReturn(BIKE_OWNERS);
-
-        mockMvc.perform(MockMvcRequestBuilders.get(BIKE_OWNERS_INDEX_GET_PATH + "/index"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(BIKE_OWNERS_INDEX_VIEW_NAME))
-                .andExpect(MockMvcResultMatchers.model().attribute(BIKE_OWNERS_MODEL_ATTRIBUTE_NAME, hasSize(2)));
-    }
-
-    @Test
     void findBikeOwners() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(BIKE_OWNERS_FIND_GET_PATH))
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/find"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name(NOT_IMPLEMENTED_VIEW_NAME));
-        // currently the method being tested is not implemented, so make sure no interactions
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/findOwners"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bikeOwner"));
+
         Mockito.verifyNoInteractions(bikeOwnerService);
+    }
+
+    @Test
+    void testFindFormReturnMultiple() throws Exception {
+        Mockito.when(bikeOwnerService.findAll()).thenReturn(BIKE_OWNERS_SET);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/ownersList"))
+                .andExpect(MockMvcResultMatchers.model().attribute("bikeOwners", hasSize(2)));
+    }
+
+    @Test
+    void testFindFormReturnOne() throws Exception {
+        Set<BikeOwner> BIKE_OWNERS_SET_SINGLE = new HashSet<>();
+        BIKE_OWNERS_SET_SINGLE.add(BikeOwner.builder().id(1L).build());
+        Mockito.when(bikeOwnerService.findAll()).thenReturn(BIKE_OWNERS_SET_SINGLE);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/bikeOwners/1"));
     }
 
     @Test
