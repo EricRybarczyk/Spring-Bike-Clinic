@@ -26,6 +26,7 @@ class BikeOwnerControllerTest {
 
     @Mock
     private BikeOwnerService bikeOwnerService;
+
     @InjectMocks
     private BikeOwnerController controller;
 
@@ -85,6 +86,52 @@ class BikeOwnerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("bikeOwners/bikeOwnerDetails"))
                 .andExpect(MockMvcResultMatchers.model().attribute("bikeOwner", hasProperty("id", is(1L))));
+    }
+
+    @Test
+    void testGetNewBikeOwnerForm() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/new"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/createOrUpdateBikeOwnerForm"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bikeOwner"));
+
+        Mockito.verifyNoInteractions(bikeOwnerService);
+    }
+
+    @Test
+    void testProcessNewBikeOwnerForm() throws Exception {
+        Mockito.when(bikeOwnerService.save(ArgumentMatchers.any(BikeOwner.class))).thenReturn(BikeOwner.builder().id(1L).build());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/bikeOwners/new"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/bikeOwners/1"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bikeOwner"));
+
+        // not checking the save result because this test is testing the Controller, not the Service
+        Mockito.verify(bikeOwnerService).save(ArgumentMatchers.any(BikeOwner.class));
+    }
+
+    @Test
+    void testGetEditExistingBikeOwnerForm() throws Exception {
+        Mockito.when(bikeOwnerService.findById(ArgumentMatchers.anyLong())).thenReturn(BikeOwner.builder().id(1L).build());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/1/edit"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/createOrUpdateBikeOwnerForm"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bikeOwner"));
+    }
+
+    @Test
+    void testSaveUpdatedExistingBikeOwnerForm() throws Exception {
+        Mockito.when(bikeOwnerService.save(ArgumentMatchers.any(BikeOwner.class))).thenReturn(BikeOwner.builder().id(1L).build());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/bikeOwners/1/edit"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/bikeOwners/1"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bikeOwner"));
+
+        // not checking the save result because this test is testing the Controller, not the Service
+        Mockito.verify(bikeOwnerService).save(ArgumentMatchers.any(BikeOwner.class));
     }
 
 }

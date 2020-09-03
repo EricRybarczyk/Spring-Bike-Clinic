@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'bikeOwners')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Bike Owner Form</title>
+</head>
+
+<h2>Bike Owner</h2>
+
+<body>
+<!--/*@thymesVar id="bikeOwner type="dev.ericrybarczyk.springbikeclinic.model.BikeOwner"*/-->
+<form th:object="${bikeOwner}" class="form-horizontal" id="add-owner-form" method="post">
+    <div class="form-group has-feedback">
+        <input th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Last Name', 'lastName', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text')}" />
+        <input th:replace="~{fragments/inputField :: input ('Email', 'emailAddress', 'text')}" />
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button th:with="text=${bikeOwner['new']} ? 'Add Bike Owner' : 'Update Bike Owner'" class="btn btn-default" type="submit" th:text="${text}">Add Bike Owner</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
