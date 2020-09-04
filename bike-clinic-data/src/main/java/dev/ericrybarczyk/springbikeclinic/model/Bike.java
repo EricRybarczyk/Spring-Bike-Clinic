@@ -1,6 +1,7 @@
 package dev.ericrybarczyk.springbikeclinic.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,6 +16,19 @@ import java.util.Set;
 @Table(name = "bikes")
 public class Bike extends BaseEntity {
 
+    // This constructor with chained super calls is required due to the inheritance hierarchy combined with using the @Builder annotation.
+    @Builder
+    public Bike(Long id, String description, BikeType bikeType, BikeOwner owner, LocalDate purchaseDate, Set<Visit> visits) {
+        super(id);
+        this.description = description;
+        this.bikeType = bikeType;
+        this.owner = owner;
+        this.purchaseDate = purchaseDate;
+        if (visits != null && visits.size() > 0) {
+            this.visits = visits;
+        }
+    }
+
     @Column(name = "description")
     private String description;
 
@@ -26,6 +40,7 @@ public class Bike extends BaseEntity {
     @JoinColumn(name = "bike_owner_id")
     private BikeOwner owner;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 

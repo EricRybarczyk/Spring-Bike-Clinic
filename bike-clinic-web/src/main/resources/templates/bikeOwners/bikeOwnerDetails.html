@@ -65,8 +65,8 @@
                     <td th:text="${visit?.description}"></td>
                 </tr>
                 <tr>
-                    <td><a th:href="@{{ownerId}/bikes/{bikeId}/edit(bikeOwnerId=${bikeOwner.id},bikeId=${bike.id})}">Edit Bike</a></td>
-                    <td><a th:href="@{{ownerId}/bikes/{bikeId}/visits/new(bikeOwnerId=${bikeOwner.id},bikeId=${bike.id})}">Add Visit</a></td>
+                    <td><a th:href="@{{bikeOwnerId}/bikes/{bikeId}/edit(bikeOwnerId=${bikeOwner.id},bikeId=${bike.id})}">Edit Bike</a></td>
+                    <td><a th:href="@{{bikeOwnerId}/bikes/{bikeId}/visits/new(bikeOwnerId=${bikeOwner.id},bikeId=${bike.id})}">Add Visit</a></td>
                 </tr>
             </table>
         </td>

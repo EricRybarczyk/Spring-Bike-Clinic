@@ -22,7 +22,9 @@ public class BikeOwner extends Person {
         this.city = city;
         this.telephone = telephone;
         this.emailAddress = emailAddress;
-        this.bikes = bikes;
+        if (bikes != null && bikes.size() > 0) {
+            this.bikes = bikes;
+        }
     }
 
     @Column(name = "address")
@@ -40,4 +42,15 @@ public class BikeOwner extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Bike> bikes = new HashSet<>();
 
+    public Bike getBike(String description) {
+        return getBike(description, false);
+    }
+
+    public Bike getBike(final String description, boolean ignoreNew) {
+        if (ignoreNew) {
+            return getBikes().stream().filter(b -> !b.isNew() && description.equalsIgnoreCase(b.getDescription())).findFirst().orElse(null);
+        } else {
+            return getBikes().stream().filter(b -> description.equalsIgnoreCase(b.getDescription())).findFirst().orElse(null);
+        }
+    }
 }

@@ -76,6 +76,7 @@ public class DataInitializer implements CommandLineRunner {
 
         Bike johnBike1 = new Bike();
         johnBike1.setOwner(owner1);
+        johnBike1.setDescription("Hardy Hardtail");
         johnBike1.setBikeType(mountain);
         johnBike1.setPurchaseDate(LocalDate.of(2017, 1, 26));
         owner1.getBikes().add(johnBike1);
@@ -96,7 +97,8 @@ public class DataInitializer implements CommandLineRunner {
         owner2.setEmailAddress("sarah@domain.com");
 
         Bike saraBike1 = new Bike();
-        saraBike1.setOwner(owner1);
+        saraBike1.setOwner(owner2);
+        saraBike1.setDescription("Dirt Rocket");
         saraBike1.setBikeType(gravel);
         saraBike1.setPurchaseDate(LocalDate.of(2018, 4, 15));
         owner2.getBikes().add(saraBike1);
@@ -109,11 +111,6 @@ public class DataInitializer implements CommandLineRunner {
         visitService.save(saraVisit);
 
         // Try out the Builder from Lombok
-        Bike mikeBike1 = Bike.builder()
-                .bikeType(road)
-                .description("Crazy Speedy")
-                .purchaseDate(LocalDate.of(2017, 7, 4))
-                .build();
         BikeOwner owner3 = BikeOwner.builder()
                 .firstName("Michael")
                 .lastName("Thomas")
@@ -121,8 +118,14 @@ public class DataInitializer implements CommandLineRunner {
                 .city("Pasadena")
                 .telephone("8889845150")
                 .emailAddress("michael@domain.com")
-                .bike(mikeBike1)
                 .build();
+        Bike mikeBike1 = Bike.builder()
+                .bikeType(road)
+                .description("Crazy Speedy")
+                .purchaseDate(LocalDate.of(2017, 7, 4))
+                .owner(owner3)
+                .build();
+        owner3.getBikes().add(mikeBike1);
         Visit mikeBikeVisit = Visit.builder()
                 .bike(mikeBike1)
                 .date(LocalDate.of(2020, 8, 11))
