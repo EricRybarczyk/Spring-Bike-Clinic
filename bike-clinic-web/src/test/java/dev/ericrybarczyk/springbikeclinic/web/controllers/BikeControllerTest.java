@@ -25,21 +25,21 @@ import java.util.Set;
 class BikeControllerTest {
 
     @Mock
-    BikeService bikeService;
+    private BikeService bikeService;
 
     @Mock
-    BikeOwnerService bikeOwnerService;
+    private BikeOwnerService bikeOwnerService;
 
     @Mock
-    BikeTypeService bikeTypeService;
+    private BikeTypeService bikeTypeService;
 
     @InjectMocks
-    BikeController bikeController;
+    private BikeController bikeController;
 
-    MockMvc mockMvc;
-    Bike BIKE;
-    BikeOwner BIKE_OWNER;
-    Set<BikeType> BIKE_TYPES;
+    private MockMvc mockMvc;
+    private Bike BIKE;
+    private BikeOwner BIKE_OWNER;
+    private Set<BikeType> BIKE_TYPES;
 
     @BeforeEach
     void setUp() {
