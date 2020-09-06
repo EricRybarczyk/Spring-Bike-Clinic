@@ -79,6 +79,19 @@ class BikeOwnerControllerTest {
     }
 
     @Test
+    void testFindFormEmptySearchReturnMultiple() throws Exception {
+        // given
+        Mockito.when(bikeOwnerService.findAll()).thenReturn(BIKE_OWNERS_SET);
+
+        // when-then
+        mockMvc.perform(MockMvcRequestBuilders.get("/bikeOwners/")
+                                              .param("lastName", ""))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("bikeOwners/ownersList"))
+                .andExpect(MockMvcResultMatchers.model().attribute("bikeOwners", hasSize(2)));
+    }
+
+    @Test
     void testShowBikeOwner() throws Exception {
         Mockito.when(bikeOwnerService.findById(ArgumentMatchers.anyLong())).thenReturn(BikeOwner.builder().id(1L).build());
 
