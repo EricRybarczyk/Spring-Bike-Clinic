@@ -45,6 +45,7 @@ public class Bike extends BaseEntity {
     private LocalDate purchaseDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike")
+    @Builder.Default
     private Set<Visit> visits = new HashSet<>();
 
 }
