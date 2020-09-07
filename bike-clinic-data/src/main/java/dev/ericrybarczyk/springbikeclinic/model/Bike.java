@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "bikes")
 public class Bike extends BaseEntity {
@@ -26,6 +25,8 @@ public class Bike extends BaseEntity {
         this.purchaseDate = purchaseDate;
         if (visits != null && visits.size() > 0) {
             this.visits = visits;
+        } else {
+            this.visits = new HashSet<>();
         }
     }
 
@@ -45,7 +46,6 @@ public class Bike extends BaseEntity {
     private LocalDate purchaseDate;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bike")
-    @Builder.Default
     private Set<Visit> visits = new HashSet<>();
 
 }
