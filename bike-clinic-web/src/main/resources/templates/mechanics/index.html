@@ -6,21 +6,25 @@
 </head>
 <body>
 <!--/*@thymesVar id="mechanic type="dev.ericrybarczyk.springbikeclinic.model.Mechanic"*/-->
+<!--/*@thymesVar id="specialty type="dev.ericrybarczyk.springbikeclinic.model.Specialty"*/-->
 <h2 th:text="'List of Mechanics'">List of Mechanics...</h2>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <td style="width: 80px;">Id</td>
-        <td style="width: 160px;">First Name</td>
-        <td style="width: 220px;">Last Name</td>
+        <td style="width: 160px;">Name</td>
+        <td style="width: 220px;">Specialties</td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="mechanic : ${mechanics}">
         <td th:text="${mechanic.id}"><a th:href="@{/mechanics/__${mechanic.id}__}" th:text="${mechanic.id}"></a></td>
-        <td th:text="${mechanic.firstName}">First</td>
-        <td th:text="${mechanic.lastName}">Last</td>
+        <td th:text="${mechanic.firstName + ' ' + mechanic.lastName}">First Lastname</td>
+        <td><span th:each="specialty, iterStat : ${mechanic.specialties}"
+                  th:text="${iterStat.last} ? ${specialty.description} : ${specialty.description + ', '}">specialty one, specialty two</span>
+            <span th:if="${mechanic?.specialties.size()==0}">none</span>
+        </td>
     </tr>
     </tbody>
 </table>
